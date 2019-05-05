@@ -1,0 +1,1 @@
+Sigue el siguiente link para restablecer tu contraseña <a href='<?php echo url('password/reset/'. csrf_token()) ?>'><?php echo url('password/reset/'. csrf_token()) ?></a>

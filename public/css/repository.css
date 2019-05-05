@@ -1,0 +1,8 @@
+
+.divButtons{   
+    text-align: -webkit-center;
+}
+
+.divButtons div{
+    display: contents;
+}
