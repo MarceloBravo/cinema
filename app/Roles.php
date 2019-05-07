@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property integer $id
@@ -26,5 +27,8 @@ class Roles extends Model
     protected $fillable = ['rol', 'created_at', 'updated_at', 'deleted_at'];
 
 
+    public static function filtrar($criterio){
+        return DB::select("SELECT id, rol FROM roles WHERE rol LIKE :criterio", ["criterio"=>'%'.$criterio.'%']);
+    }
 
 }

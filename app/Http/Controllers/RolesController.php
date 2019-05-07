@@ -121,4 +121,14 @@ class RolesController extends Controller
         
         return Redirect::to("/roles");
     }
+    
+    public function filtrar(Request $request){
+        $filtro = $request['filtro'];
+        if($filtro == ""){
+            return Redirect::to("/roles");
+        }else{
+            $roles = Roles::filtrar($filtro);
+            return view("roles.index",compact("roles","filtro"));
+        }
+    }
 }

@@ -24,11 +24,13 @@ class MoviesRequest extends FormRequest
     public function rules()
     {
         return [
-            "nombre"  => "required",   
+            "nombre"  => "required|unique:movies,nombre,".$this->movie,   
             "duracion" => "required",
             "reparto" => "required", 
             "director" => "required",   
-            "genero_id" => "required"   
+            "genre_id" => "required",
+            "triller" => "required",
+            "resumen" => "required|max:500"
             //
         ];
     }

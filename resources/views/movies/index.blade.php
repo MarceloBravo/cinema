@@ -22,9 +22,9 @@
                         </div>
                         <div class="col-md-9"></div>
                         <div class="col-md-2">
-                            <form id='formBuscar' method="post" action="/usuarios/filtrar">
+                            <form id='formBuscar' method="post" action="/movies/filtrar">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                                <input type="text" id="txtFiltro" name="filtro" class="form-control" placeholder="Buscar" value="{{$filtro}}"/>
+                                <input type="text" id="txtFiltro" name="filtro" class="form-control" placeholder="Buscar" value="{{$filtro}}" onchange="filtrar()"/>
                             </form>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                             <thead>
                                 <tr>                                    
                                     <th>Nombre</th>
-                                    <th>Duracción</th>
+                                    <th>Duración</th>
                                     <th>Género</th>                                    
                                     <th>Afiche</th>                                    
                                     <th class="text-center" style="width: 100px;">Aciones</th>
@@ -48,7 +48,7 @@
                                     <td>{{ $movie->duracion }}</td>
                                     <td>{{ $movie->genero }}</td>
                                     <td>                                        
-                                        <img src="afiches/{{ $movie->afiche }} " class='preview' />
+                                        <img src="/afiches/{{ $movie->afiche }} " class='preview' />
                                     </td>
                                     <td>
                                         {{link_to_route("movies.edit", $title="Editar", $parameters=$movie->id, $attributes=['class'=>'btn btn-primary btn-xs'])}}
@@ -57,7 +57,9 @@
 
                                 @endforeach
                                 
-                                {{ $movies->links() }}
+                                @if($filtro == "")
+                                    {{ $movies->links() }}
+                                @endif
                             </tbody>
                         </table>
                         

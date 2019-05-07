@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule; //import Rule class
 
-
-class UpdateUserRequest extends FormRequest
+class UpdateGenreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +24,7 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required",  //Debe hacer referencia al nombre del objeto de formulario (DOM) no el nombre del campo de la base de datos
-            "email"=>'required|email|max:30|unique:users,email,'.$this->usuario,
-            "rol_id"=>"required"
-            //
+            "genero"=>"required|unique:genres,genero,".$this->genero
         ];
     }
 }

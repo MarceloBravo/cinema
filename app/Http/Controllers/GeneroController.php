@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateGenreRequest;
+use App\Http\Requests\UpdateGenreRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Genre;
@@ -43,18 +43,11 @@ class GeneroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateGenreRequest $request)
     {
         $genero = new Genre();
-        try{
-            $genero->genero = $request->input("genero");
-            $genero->save();
-
-            Session::flash("message-ok","El registro ha sido creado");
-        }catch(Exception $ex){
-            Session::flash("message-error","Error al intentar crear el registro: ".$ex->getMessage());
-        }
-
+        $genero->fill($request->all())->save();
+        Session::flash("message-ok","El registro ha sido creado");        
         return Redirect::to("generos");
     }
 
@@ -93,18 +86,11 @@ class GeneroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateGenreRequest $request, $id)
     {
         $genero = Genre::find($id);
-        try{
-            $genero->genero = $request->input("genero");
-            $genero->save();
-
-            Session::flash("message-ok", "El registro ha sido actualizado exitosamente!");
-        }catch(Exception $ex){
-            Session::flash("message-error","Error al intentar actualizar el registro: ".$ex->getMessage());
-        }
-
+        $genero->fill($request->all())->save();
+        Session::flash("message-ok", "El registro ha sido actualizado exitosamente!");        
         return Redirect::to("generos");
     }
 

@@ -24,13 +24,17 @@ Route::resource('reviews','ReviewsController');
 Route::resource('single','SingleController');
 Route::resource('videos','VideosController');
 Route::resource('usuarios','UsuariosController');
+Route::post('usuarios/filtrar','UsuariosController@filtro');
 Route::resource('generos','GeneroController');
 Route::resource('roles','RolesController');
+Route::post('roles/filtrar','RolesController@filtrar');
 Route::resource('movies','MoviesController');
+Route::post('movies/filtrar','MoviesController@filtrar');
 Route::resource('contacto','EmailController');
 Route::resource('repository', 'ArchivosController');
 Route::Resource('config','ConfigController');
 Route::Resource('noticias','NewsController');
+Route::post('noticias/filtrar','NewsController@filtrar');
 Route::get('review', 'HomeController@reviews');
 
 /** Resetear contraseña **/

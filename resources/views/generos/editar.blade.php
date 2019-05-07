@@ -2,6 +2,7 @@
 
 @section('content')
 
+@include('alerts.alertRequest')
 <!-- Page Content -->
 <div class="container-fluid p-y-md">
     <!-- Forms Row -->
@@ -20,18 +21,12 @@
                 <div class="card-block">
                     <!-- jQuery Validation (.js-validation-bootstrap class is initialized in js/pages/base_forms_validation.js) -->
                     <!-- For more examples please check https://github.com/jzaefferer/jquery-validation -->
-                    <form id="form" class="js-validation-bootstrap form-horizontal" action="/generos/{{ $genero->id }}" method="POST">
+                    {{ Form::model($genero, ['id'=>'form','route'=>['generos.update',$genero->id],'method'=>'PUT', 'class'=>'js-validation-bootstrap form-horizontal']) }}
+                    
+                        @include('generos.form')
                         
-                        <input type="hidden" name="_method" value="PUT"/>
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                        
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="usuario">Genero: <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="genero" name="genero" placeholder="Ingresa el nombre del género." value="{{ $genero->genero }}"/>
-                            </div>
-                        </div>
-                    </form>
+                    {{ Form::close() }}
+                    
                     <form id="formDelete" action="/generos/{{ $genero->id }}" method="post">                        
                         <input type="hidden" name='_method' value='DELETE'>
                         <input type="hidden" name='_token' value="{{ csrf_token() }}"> 

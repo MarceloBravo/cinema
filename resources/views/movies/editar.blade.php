@@ -27,6 +27,8 @@
                             <img id="imagePreview" name="imagePreview" src="../../afiches/{{ $pelicula->afiche }}" class='formAfiche'/>
                             <input type="hidden" id="aficheActual" name="aficheActual" value="{{ $pelicula->afiche }}" />
                         </div>
+                        @include('movies.form')
+                        <!--
                         <div class='form-group col-md-10'>
                             <div class="form-group">
                                 {{ Form::label('lblNombre', 'Nombre:', ['class'=>'col-md-4 control-label']) }}
@@ -87,6 +89,7 @@
 
 
                         </div>
+                        -->
                     {{ Form::close() }}
                     <form id='formDelete' method='post' action='/movies/{{ $pelicula->id }}'/>
                         <input type='hidden' name='_method' value='DELETE'/>

@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 @include('alerts.alertRequest')
 
 <!-- Page Content -->
@@ -23,48 +22,19 @@
                 <div class="card-block">
                     <!-- jQuery Validation (.js-validation-bootstrap class is initialized in js/pages/base_forms_validation.js) -->
                     <!-- For more examples please check https://github.com/jzaefferer/jquery-validation -->
-                    <form id="form" class="js-validation-bootstrap form-horizontal" action="/usuarios" method="POST">
+                    {{ Form::open(['id'=>'form', 'route'=>'usuarios.store','method'=>'POST','class'=>'js-validation-bootstrap form-horizontal']) }}
+                    
+                        @include('usuarios.form')
                         
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                        
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="usuario">Nombre de usuario <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="Ingresa tu nombre de usuario" />
-                            </div>
+                    {{ Form::close() }}
+                    
+                    <div class="form-group m-b-0 divFormButtons">
+                        <div class="col-md-8 col-md-offset-4">
+                            <button class="btn btn btn-primary" type="button" onclick="grabarUsuario()">Grabar</button>
+                            <button class="btn btn btn-danger" type="button" disabled>Eliminar</button>
+                            <button id="btnCancelar" class="btn btn btn-default" type="button" onclick="cancelar('/usuarios')">Cancelar</button>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="email">Email <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="email" name="email" placeholder="Ingresa tu email" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="rol_id">Rol: <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                {{ Form::select("rol_id", $roles, null, ["id"=>"id_rol", "class"=>"form-control"]) }}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="password">Contraseña <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="password" id="password" name="password" placeholder="Ingresa una contraseña" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="confirmPassword">Confirmación de contraseña <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" placeholder="Vuelve a ingresar la contraseña">
-                            </div>
-                        </div>
-                        <div class="form-group m-b-0">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button class="btn btn btn-primary" type="button" onclick="grabarUsuario()">Grabar</button>
-                                <button class="btn btn btn-danger" type="button" disabled>Eliminar</button>
-                                <button id="btnCancelar" class="btn btn btn-default" type="button" onclick="cancelar('/usuarios')">Cancelar</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
                 <!-- .card-block -->
             </div>
@@ -116,3 +86,7 @@
 <script src="{{asset('js/usuarios.js')}}"></script>
 @endsection
 
+
+@section('style')
+<link type="text/css" href="{{ asset('css/mantenedor_usuarios.css') }}" rel="stylesheet"/>
+@endsection

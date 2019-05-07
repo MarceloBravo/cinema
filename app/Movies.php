@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Auth;
 //use Carbon\Carbon;
 /**
  * @property integer $id
@@ -27,9 +29,9 @@ class Movies extends Model
     /**
      * @var array
      */
-    protected $fillable = ['nombre', 'afiche', 'reparto', 'director', 'duracion', 'user_id', 'created_at', 'updated_at'];
+    protected $fillable = ['nombre', 'afiche', 'reparto', 'director', 'duracion', 'triller', 'fecha', 'resumen', 'genre_id', 'user_id', 'created_at', 'updated_at'];
 
-    /*
+        /*
     public static function setPathAttribute($path){
         $name = "";
         if(!empty($path)){
@@ -47,4 +49,24 @@ class Movies extends Model
                 ->select('movies.*','genres.genero')
                 ->paginate(15);
     }
+    
+    public static function filtro($criterio){
+        return DB::select("SELECT m.id, m.nombre, m.director, m.duracion, m.afiche, g.genero "
+                . "FROM movies m "
+                . "INNER JOIN genres g ON m.genre_id = g.id "
+                . "WHERE "
+                . "CONCAT(m.nombre, ' ', m.duracion, ' ', g.genero) "
+                . "LIKE :criterio",["criterio"=>'%'.$criterio.'%']);
+    }
+    
+    public function setAficheAttribute($value) {
+        if(isset($value)){
+            //$name = Carbon::now()->second.$value->getClientOriginalName();  //antenpone el segundo actual alnombre del campo para evitar que sobreescriba el archivo
+            $name = $value->getClientOriginalName();  //antenpone el segundo actual alnombre del campo para evitar que sobreescriba el archivo
+            \Storage::disk('local')->put($name, \File::get($value));   //Guarda el archivo en la carpeta afiche (ver config/filesystems.php)
+            $this->attributes['afiche'] = $name;    //Guarda en el campo afiche el el nombnre del archivo sin su ruta
+        }
+    }
+    
+    
 }

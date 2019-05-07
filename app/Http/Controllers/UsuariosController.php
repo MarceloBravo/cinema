@@ -7,6 +7,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Roles;
 
@@ -25,7 +26,11 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        $usuarios = User::paginate(15);
+        //$usuarios = User::paginate(15);
+        $usuarios = DB::Table("users")
+                ->join("roles","roles.id","=","users.rol_id")
+                ->select("users.*","roles.rol")
+                ->paginate(15);
         
         $filtro = "";
         return view("usuarios.index", compact("usuarios","filtro"));
@@ -50,9 +55,12 @@ class UsuariosController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $usuario = new User();
+        $usuario = new User();   
+        $usuario->fill($request->all())->save();
+        Session::flash("message-ok","El usuario ha sido creado!");
+        /*
         try{
-            $usuario->name = $request->input("usuario");
+            $usuario->name = $request->input("name");
             $usuario->email = $request->input("email");
             $usuario->rol_id = $request->input("rol_id");
             $usuario->password = bcrypt($request->input("password")) ;
@@ -62,7 +70,7 @@ class UsuariosController extends Controller
         } catch (Exception $ex) {
             Session::flash("message-error","Error al crear el usuario: ".$ex->getMessage());
         }
-        
+        */
         return Redirect::to("/usuarios");
     }
 
@@ -100,19 +108,14 @@ class UsuariosController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $usuario = User::find($id);
-        try{
-            $usuario->name = $request->input("usuario");
-            $usuario->email = $request->input("email");
-            $usuario->rol_id = $request->input("rol_id");
-            if($request->input("password") != ""){
-                $usuario->password = bcrypt($request->input("password"));
-            }
-            $usuario->save();
-            
-            Session::flash("message-ok","El usuario ha sido actualizado!");
-        } catch (Exception $ex) {
-            Session::flash("message-error","Error al crear el usuario: ".$ex->getMessage());
+        if($request->input('password') == ''){
+            $usuario->fill($request->except('password'));
+        }else{
+            $usuario->fill($request->all());
         }
+        
+        $usuario->save();            
+        Session::flash("message-ok","El usuario ha sido actualizado!");
         
         return Redirect::to("/usuarios");
     }
@@ -135,5 +138,20 @@ class UsuariosController extends Controller
         }
         
         return Redirect::to("/usuarios");
+    }
+    
+    
+    public function filtro(Request $request){
+        if($request['filtro'] == ""){
+            return Redirect::to("/usuarios");
+        }else{
+            $filtro = $request['filtro'];
+            $usuarios = DB::select("SELECT u.id, u.name, u.email, r.rol "
+                    . "FROM users u "
+                    . "INNER JOIN roles r ON u.rol_id = r.id "
+                    . "WHERE "
+                    . "CONCAT(u.name, ' ', u.email, ' ', r.rol) LIKE :criterio", ["criterio"=>'%'.$request['filtro'].'%']);
+            return view("usuarios.index",compact("usuarios","filtro"));
+        }
     }
 }

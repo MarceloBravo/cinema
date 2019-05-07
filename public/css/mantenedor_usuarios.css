@@ -7,27 +7,8 @@ and open the template in the editor.
     Created on : 01-05-2019, 11:47:06
     Author     : LENOVO
 */
-.preview{
-    height: 100px;
-}
-
-.formAfiche{
-    height: 315px;
-}
-
-form{
-    display: flex;
-}
-
-.divButtons{
-    text-align: -webkit-center;
-}
-
-.divButtons div{
-    display: contents;
-}
-
 input[type="password"]{
     border-color: #edeeef !important;
     border-style: solid !important;    
+    border-width: thin;
 }

@@ -184,8 +184,7 @@
                 </header>
                 <!-- End header -->
 
-                <main class="app-layout-content">
-
+                <main class="app-layout-content">                    
 
                     @yield('content')
 

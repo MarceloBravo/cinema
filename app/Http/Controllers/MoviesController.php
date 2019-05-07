@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MoviesRequest;
 use App\Movies;
 use App\Genre;
@@ -52,7 +53,8 @@ class MoviesController extends Controller
     {
         $movie = new Movies();
         try{
-            $this->grabar($request, $movie);
+            $movie->fill(array_merge($request->all(), ['user_id'=>Auth::user()->id]));
+            $movie->save();
 
             Session::flash("message-ok","La pelicula ha sido registrada!");            
         }catch(Exception $ex){            
@@ -95,9 +97,10 @@ class MoviesController extends Controller
      */
     public function update(MoviesRequest $request, $id)
     {
-        $pelicula = Movies::find($id);
-        try{
-            $this->grabar($request, $pelicula);
+        $movie = Movies::find($id);
+        try{            
+            $movie->fill(array_merge($request->all(), ['user_id'=>Auth::user()->id]));
+            $movie->save();
 
             Session::flash("message-ok","La pelicula ha sido actualizada!");            
         }catch(Exception $ex){            
@@ -127,23 +130,46 @@ class MoviesController extends Controller
         return Redirect::to("/movies");
     }
     
+    
+    //private function subirArchivo(MoviesRequest $request){
+    //    $archivo = $this->uploadFile($request->file("afiche"));
+    //    if($archivo == ""){
+    //        $archivo = $request->input("aficheActual");
+    //    }
+    //}
+    
     private function grabar(MoviesRequest $request, $pelicula){
         //$archivo = Movies::setPathAttribute($request->file("afiche"));
-        $archivo = $this->uploadFile($request->file("afiche"));
-        if($archivo == ""){
-            $archivo = $request->input("aficheActual");
-        }
+        //Subiendo el 
         
-        $pelicula->nombre = $request->input("nombre");
-        $pelicula->duracion = $request->input("duracion");
-        $pelicula->reparto = $request->input("reparto");
-        $pelicula->director = $request->input("director");
-        $pelicula->afiche = $archivo;
-        $pelicula->genre_id = $request->input("genero_id");
-        $pelicula->triller = $request->input("triller");
-        $pelicula->fecha = $request->input("fecha");
-        $pelicula->resumen = $request->input("resumen");
-        $pelicula->user_id = Auth::user()->id;            
-        $pelicula->save();
+        ////$archivo = $this->uploadFile($request->file("afiche"));
+        //if($archivo == ""){
+        //    $archivo = $request->input("aficheActual");
+        //}
+        return Movies::create(
+                [
+                    "nombre" => $request->input("nombre"),
+                    "duracion" => $request->input("duracion"),
+                    "reparto" => $request->input("reparto"),
+                    "director" => $request->input("director"),
+                    "afiche" => $request->file("afiche"),
+                    "genre_id" => $request->input("genero_id"),
+                    "triller" => $request->input("triller"),
+                    "fecha" => $request->input("fecha"),
+                    "resumen" => $request->input("resumen"),
+                    "user_id" => Auth::user()->id
+                ]);
+        
+        //$pelicula->save();
+    }
+     
+    public function filtrar(Request $request){        
+        $filtro = $request['filtro'];
+        if($filtro == ""){
+            return Redirect::to("/movies");
+        }else{
+            $movies = Movies::filtro($filtro);
+            return view("movies.index", compact("movies","filtro"));
+        }
     }
 }

@@ -11,8 +11,8 @@ function grabarUsuario(){
 }
 
 function confirmPassword(){
-    var pwd1 = document.getElementById("password");
-    var pwd2 = document.getElementById("confirmPassword");
+    var pwd1 = document.getElementsByName("password");
+    var pwd2 = document.getElementsByName("confirm-password");
     var msg = "";
     switch(true){
         //case pwd1.value == "":

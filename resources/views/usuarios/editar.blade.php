@@ -22,43 +22,12 @@
                 <div class="card-block">
                     <!-- jQuery Validation (.js-validation-bootstrap class is initialized in js/pages/base_forms_validation.js) -->
                     <!-- For more examples please check https://github.com/jzaefferer/jquery-validation -->
-                    <form id="form" class="js-validation-bootstrap form-horizontal" action="/usuarios/{{$usuario->id}}" method="post">
+                    {{ Form::model($usuario, ['id'=>'form', 'route'=>['usuarios.update',$usuario->id],'method'=>'PUT','class'=>'js-validation-bootstrap form-horizontal']) }}
+                    
+                        @include('usuarios.form')
                         
-                        <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+                    {{ Form::close() }}
                         
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="usuario">Nombre de usuario <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="Ingresa tu nombre de usuario" value='{{$usuario->name}}'/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="email">Email <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="email" name="email" placeholder="Ingresa tu email" value='{{$usuario->email}}'/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="rol_id">Rol: <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                {{ Form::select("rol_id", $roles, $usuario->rol_id, ["id"=>"id_rol", "class"=>"form-control"])}}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="password">Contraseña <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="password" id="password" name="password" placeholder="Ingresa una contraseña" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="val-confirm-password">Confirmación de contraseña <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="password" id="confirm-password" name="confirm-password" placeholder="Vuelve a ingresar la contraseña">
-                            </div>
-                        </div>
-                        
-                    </form>
                     <form id="formDelete" action="/usuarios/{{$usuario->id}}" method="post">
                         <div>
                             <input type="hidden" name='_method' value='DELETE'>
@@ -118,5 +87,9 @@
 </div>
 <!-- End Page Content -->
 
-@endsection                
+@endsection     
+
+@section('style')
+<link type="text/css" href="{{ asset('css/mantenedor_usuarios.css') }}" rel="stylesheet"/>
+@endsection
 

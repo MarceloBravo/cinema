@@ -22,9 +22,9 @@
                         </div>
                         <div class="col-md-9"></div>
                         <div class="col-md-2">
-                            <form id='formBuscar' method="post" action="/usuarios/filtrar">
+                            <form id='formBuscar' method="post" action="/roles/filtrar">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                                <input type="text" id="txtFiltro" name="filtro" class="form-control" placeholder="Buscar" value="{{$filtro}}"/>
+                                <input type="text" id="txtFiltro" name="filtro" class="form-control" placeholder="Buscar" value="{{$filtro}}" onchange="filtrar()"/>
                             </form>
                         </div>
                     </div>
@@ -52,7 +52,9 @@
 
                             </tbody>
                         </table>
-                        {{ $roles->links()}}
+                        @if($filtro == "")
+                            {{ $roles->links()}}
+                        @endif
                     </div>
                     <!-- .card-block -->
                 </div>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property integer $id
@@ -35,4 +36,12 @@ class NewsModel extends Model
      */
     protected $fillable = ['titulo', 'noticia', 'imagen', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
 
+    public static function filtrar($criterio){
+        
+        return  DB::select("SELECT id, titulo, fecha, noticia, imagen FROM news "
+                . "WHERE "
+                . "CONCAT(titulo, ' ', CAST(fecha AS CHAR(10)), ' ', noticia) "
+                . "LIKE :criterio", ["criterio"=>'%'.$criterio.'%']);
+        
+    } 
 }

@@ -25,7 +25,7 @@
                         <div class="col-md-2">
                             <form id='formBuscar' method="post" action="/noticias/filtrar">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                                <input type="text" id="txtFiltro" name="filtro" class="form-control" placeholder="Buscar" value="{{$filtro}}"/>
+                                <input type="text" id="txtFiltro" name="filtro" class="form-control" placeholder="Buscar" value="{{$filtro}}" onchange="filtrar()"/>
                             </form>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                                     <td>{{ date('d-m-Y',strtotime($news->fecha)) }}</td>
                                     <td>{{ $news->noticia }}</td>
                                     <td>                                        
-                                        <img src="news/{{ $news->imagen }} " class='preview' />
+                                        <img src="/news/{{ $news->imagen }} " class='preview' />
                                     </td>
                                     <td>
                                         {{link_to_route("noticias.edit", $title="Editar", $parameters=$news->id, $attributes=['class'=>'btn btn-primary btn-xs'])}}
@@ -58,7 +58,9 @@
 
                                 @endforeach
 
-                                {{ $noticias->links() }}
+                                @if($filtro == "")
+                                    {{ $noticias->links() }}
+                                @endif
                             </tbody>
                         </table>
                         

@@ -137,4 +137,14 @@ class NewsController extends Controller
         $noticia->imagen = $archivo;
         $noticia->save();
     }
+    
+    public function filtrar(Request $request){
+        $filtro = $request['filtro'];
+        if($filtro == ""){
+            return Redirect::to("/noticias");
+        }else{
+            $noticias = News::filtrar($filtro);
+            return view("noticias.index",compact("noticias","filtro"));
+        }
+    }
 }

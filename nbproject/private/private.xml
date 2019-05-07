@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/wamp/www/cinema/resources/views/usuarios/form.blade.php</file>
+            <file>file:/C:/wamp/www/cinema/public/css/mantenedor_usuarios.css</file>
+            <file>file:/C:/wamp/www/cinema/resources/views/roles/editar.blade.php</file>
+            <file>file:/C:/wamp/www/cinema/resources/views/usuarios/editar.blade.php</file>
+            <file>file:/C:/wamp/www/cinema/resources/views/usuarios/crear.blade.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Requests/UpdateUserRequest.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Requests/CreateUserRequest.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/UsuariosController.php</file>
+            <file>file:/C:/wamp/www/cinema/app/User.php</file>
+            <file>file:/C:/wamp/www/cinema/public/css/mantenedor_peliculas.css</file>
+        </group>
     </open-files>
 </project-private>

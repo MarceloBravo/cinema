@@ -2,6 +2,7 @@
 
 @section('content')
 
+@include('alerts.alertRequest')
 <!-- Page Content -->
 <div class="container-fluid p-y-md">
     <!-- Forms Row -->
@@ -20,16 +21,10 @@
                 <div class="card-block">
                     <!-- jQuery Validation (.js-validation-bootstrap class is initialized in js/pages/base_forms_validation.js) -->
                     <!-- For more examples please check https://github.com/jzaefferer/jquery-validation -->
-                    <form id="form" class="js-validation-bootstrap form-horizontal" action="/generos" method="POST">
+                    {{ Form::open(['id'=>'form','route'=>'generos.store','method'=>'POST','class'=>'js-validation-bootstrap form-horizontal'])}}
                         
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                        
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="usuario">Genero: <span class="text-orange">*</span></label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="genero" name="genero" placeholder="Ingresa el nombre del género." />
-                            </div>
-                        </div>
+                        @include('generos.form')
+                    
                         <div class="form-group m-b-0 divFormButtons">
                             <div class="col-md-8 col-md-offset-4">
                                 <button class="btn btn btn-primary" type="button" onclick="grabar()">Grabar</button>
@@ -37,7 +32,7 @@
                                 <button id="btnCancelar" class="btn btn btn-default" type="button" onclick="cancelar('/generos')">Cancelar</button>
                             </div>
                         </div>
-                    </form>
+                    {{ Form::close()}}
                 </div>
                 <!-- .card-block -->
             </div>

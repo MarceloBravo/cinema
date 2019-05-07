@@ -34,3 +34,7 @@ function cancelar(destino){
     window.location = destino;
 }
 
+function filtrar(){
+    document.getElementById('formBuscar').submit();
+}
+

@@ -24,7 +24,7 @@
                         <div class="col-md-2">
                             <form id='formBuscar' method="post" action="/usuarios/filtrar">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                                <input type="text" id="txtFiltro" name="filtro" class="form-control" placeholder="Buscar" value="{{$filtro}}"/>
+                                <input type="text" id="txtFiltro" name="filtro" class="form-control" placeholder="Ingrese el texto a buscar y presione Enter" value="{{$filtro}}" onchange="filtrar()"/>
                             </form>
                         </div>
                     </div>
@@ -33,6 +33,7 @@
                             <thead>
                                 <tr>                                    
                                     <th>Nombre</th>
+                                    <th>Rol</th>
                                     <th>Email</th>
                                     <th class="text-center" style="width: 100px;">Actions</th>
                                 </tr>
@@ -44,6 +45,7 @@
 
                                 <tr>                                    
                                     <td>{{ $usuario->name }}</td>
+                                    <td>{{ $usuario->rol }}</td>
                                     <td>{{ $usuario->email }}</td>
                                     <td>
                                         {{link_to_route("usuarios.edit", $title="Editar", $parameters=$usuario->id, $attributes=['class'=>'btn btn-primary btn-xs'])}}                              
@@ -54,7 +56,9 @@
 
                             </tbody>
                         </table>
-                        {{ $usuarios->links()}}
+                        @if($filtro == "")
+                            {{ $usuarios->links()}}
+                        @endif
                     </div>
                     <!-- .card-block -->
                 </div>
