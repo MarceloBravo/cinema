@@ -56,7 +56,7 @@
                                 <li class="nav-item nav-drawer-header">Cinema</li>
 
                                 <li class="nav-item">
-                                    <a href="{{ url('/logout')}}"><i class="ion-ios-speedometer-outline"></i> Página web</a>
+                                    <a href="{{ url('/logout')}}"><i class="ion-ios-speedometer-outline"></i> Frontend</a>
                                 </li>
                                 
                                 <li class="nav-item nav-item-has-subnav active open">
@@ -70,12 +70,20 @@
                                             <a href="{{ url('/movies')}}">Peliculas</a>
                                         </li>
 
-                                        <li class="active">
+                                        <li>
                                             <a href="{{ url('/repository') }}">Repositorio</a>
                                         </li>
                                         
-                                        <li class="active">
+                                        <li>
                                             <a href="{{ url('/noticias') }}">Noticias</a>
+                                        </li>
+                                        
+                                        <li>
+                                            <a href="{{ url('/generos_musicales') }}">Generos musicales</a>
+                                        </li>
+                                        
+                                        <li>
+                                            <a href="{{ url('/mnt_videos') }}">Videos</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -112,13 +120,13 @@
                     <nav class="navbar navbar-default">
                         <div class="container-fluid">
                             
-
                             <div class="collapse navbar-collapse" id="header-navbar-collapse">
                                 <!-- Header search form -->
-                                
+                                    
                                 <ul id="main-menu" class="nav navbar-nav navbar-left">
                                     
                                     <li class="dropdown">
+                                        <!--
                                         <a href="#" data-toggle="dropdown">Pages <span class="caret"></span></a>
 
                                         <ul class="dropdown-menu">
@@ -126,8 +134,10 @@
                                             <li><a href="javascript:void(0)">Visits</a></li>
                                             <li><a href="javascript:void(0)">Changelog</a></li>
                                         </ul>
+                                        -->
                                     </li>
                                 </ul>
+                                
                                 <!-- .navbar-left -->
 
                                 <ul class="nav navbar-nav navbar-right navbar-toolbar hidden-sm hidden-xs">
@@ -135,7 +145,7 @@
                                         <!-- Opens the modal found at the bottom of the page -->
                                         <a href="javascript:void(0)" data-toggle="modal" data-target="#apps-modal"><i class="ion-grid"></i></a>
                                     </li>
-
+                                    <!--
                                     <li class="dropdown">
                                         <a href="javascript:void(0)" data-toggle="dropdown"><i class="ion-ios-bell"></i> <span class="badge">3</span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
@@ -153,13 +163,14 @@
                                             </li>
                                         </ul>
                                     </li>
-
+                                    -->
                                     <li class="dropdown dropdown-profile">
                                         <a href="javascript:void(0)" data-toggle="dropdown">
                                             <span class="m-r-sm">{{ Auth::user()->name }} <span class="caret"></span></span>
-                                            <img class="img-avatar img-avatar-48" src="{{asset('appui/img/avatars/avatar3.jpg')}}" alt="User profile pic" />
+                                            <img class="img-avatar img-avatar-48" src="{{ (isset(Auth::user()->foto) ? asset('/images/'.Auth::user()->foto) : asset('appui/img/avatars/avatar3.jpg')) }}" />
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-right">
+                                            <!--
                                             <li class="dropdown-header">
                                                 Pages
                                             </li>
@@ -169,6 +180,7 @@
                                             <li>
                                                 <a href="base_pages_profile.html"><span class="badge badge-success pull-right">3</span> Blog</a>
                                             </li>
+                                            -->
                                             <li>
                                                 <a href="logout">Salir</a>
                                             </li>
@@ -214,13 +226,13 @@
                         <div class="card-block">
                             <div class="row text-center">
                                 <div class="col-xs-6">
-                                    <a class="card card-block m-b-0 bg-app-secondary bg-inverse" href="index.html">
+                                    <a class="card card-block m-b-0 bg-app-secondary bg-inverse" href="/dashboard">
                                         <i class="ion-speedometer fa-4x"></i>
                                         <p>Admin</p>
                                     </a>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a class="card card-block m-b-0 bg-app-tertiary bg-inverse" href="frontend_home.html">
+                                    <a class="card card-block m-b-0 bg-app-tertiary bg-inverse" href="/logout">
                                         <i class="ion-laptop fa-4x"></i>
                                         <p>Frontend</p>
                                     </a>

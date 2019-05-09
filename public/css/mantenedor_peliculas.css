@@ -15,19 +15,10 @@ and open the template in the editor.
     height: 315px;
 }
 
-form{
-    display: flex;
-}
-
 .divButtons{
     text-align: -webkit-center;
 }
 
 .divButtons div{
     display: contents;
-}
-
-input[type="password"]{
-    border-color: #edeeef !important;
-    border-style: solid !important;    
 }

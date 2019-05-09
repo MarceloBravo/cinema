@@ -7,8 +7,15 @@ and open the template in the editor.
     Created on : 01-05-2019, 11:47:06
     Author     : LENOVO
 */
+.card-block{
+    display: grid;    
+}
+
 input[type="password"]{
     border-color: #edeeef !important;
     border-style: solid !important;    
     border-width: thin;
+}
+#imagePreview{
+    border-radius: 100%;    
 }

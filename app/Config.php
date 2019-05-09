@@ -41,8 +41,36 @@ class Config extends Model
         'resena_pelicula_portada',
         'genre_id',
         'user_id', 
+        'nombre_app',
+        'imagen_app',
+        'footer_title',
+        'footer_text',
+        'footer_text2',
+        'titulo1',
+        'titulo2',
+        'titulo3',
+        'titulo4',
         'deleted_at', 
         'created_at', 
         'updated_at'];
+    
+    
+    public function setImagenPortadaAttribute($value){
+        if(isset($value)){
+            //$name = Carbon::now()->second.$value->getClientOriginalName();  //antenpone el segundo actual alnombre del campo para evitar que sobreescriba el archivo
+            $name = $value->getClientOriginalName();  //antenpone el segundo actual alnombre del campo para evitar que sobreescriba el archivo
+            \Storage::disk('local')->put($name, \File::get($value));   //Guarda el archivo en la carpeta afiche (ver config/filesystems.php)
+            $this->attributes['imagen_portada'] = $name;    //Guarda en el campo afiche el el nombnre del archivo sin su ruta
+        }
+    }
+    
+    public function setImagenAppAttribute($value){
+        if(isset($value)){
+            //$name = Carbon::now()->second.$value->getClientOriginalName();  //antenpone el segundo actual alnombre del campo para evitar que sobreescriba el archivo
+            $name = $value->getClientOriginalName();  //antenpone el segundo actual alnombre del campo para evitar que sobreescriba el archivo
+            \Storage::disk('appImages')->put($name, \File::get($value));   //Guarda el archivo en la carpeta afiche (ver config/filesystems.php)
+            $this->attributes['imagen_app'] = $name;    //Guarda en el campo afiche el el nombnre del archivo sin su ruta
+        }
+    }
 
 }

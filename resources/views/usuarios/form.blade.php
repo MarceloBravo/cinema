@@ -25,6 +25,12 @@
 <div class="form-group">
     {{ Form::label('lblPassword','Confirmación de contraseña',['class'=>'col-md-4 control-label']) }}
     <div class="col-md-7">
-        {{ Form::password('confirm-password', null, ['id'=>'confirm-password', 'class'=>'Vuelva a ingresar la contraseña'])}}
+        {{ Form::password('confirm-password', null, ['id'=>'confirm-password', 'placeholder'=>'Vuelva a ingresar la contraseña'])}}
+    </div>
+</div>
+<div class="form-group">
+    {{ Form::label('lblFoto','Foto',['class'=>'col-md-4 control-label']) }}
+    <div class="col-md-7">
+        {{ Form::file('foto',['onchange'=>'refreshImage(this)'])}}
     </div>
 </div>

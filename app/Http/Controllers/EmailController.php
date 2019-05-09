@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use App\Config;
 
 class EmailController extends Controller
 {
@@ -16,7 +17,8 @@ class EmailController extends Controller
      */
     public function index()
     {
-        return view("contacto");
+        $config = Config::first();
+        return view("contacto", compact("config"));
     }
 
     /**

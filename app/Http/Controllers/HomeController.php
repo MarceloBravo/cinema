@@ -36,12 +36,12 @@ class HomeController extends Controller
 
     public function logout(){
         Auth::logout();
-        $config = $this->infoPortada();
-        $carrusel1 = $config["carrusel1"];
-        $carrusel2 = $config["carrusel2"];
-        $movie = $config["movie"];
+        $conf = $this->infoPortada();
+        $carrusel1 = $conf["carrusel1"];
+        $carrusel2 = $conf["carrusel2"];
+        $config = $conf["movie"];
         $noticias = News::paginate(5);
-        return view('home', compact("carrusel1","carrusel2","movie","noticias"));
+        return view('home', compact("carrusel1","carrusel2","config","noticias"));
         //return Redirect::to("index");
     }
     /**
@@ -51,12 +51,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $config = $this->infoPortada();
-        $carrusel1 = $config["carrusel1"];
-        $carrusel2 = $config["carrusel2"];
-        $movie = $config["movie"];
+        $conf = $this->infoPortada();
+        $carrusel1 = $conf["carrusel1"];
+        $carrusel2 = $conf["carrusel2"];
+        $config = $conf["movie"];
         $noticias = News::paginate(5);
-        return view('home',compact('carrusel1', 'carrusel2', 'movie', 'noticias'));
+        return view('home',compact('carrusel1', 'carrusel2', 'config', 'noticias'));
     }
     
     public function reviews(){
@@ -65,8 +65,8 @@ class HomeController extends Controller
     }
     
     private function infoPortada(){
-        $carrusel1 = DB::Table("movies")->select("movies.*")->orderBy("created_at", "desc")->paginate(20);
-        $carrusel2 = DB::Table("movies")->select("movies.*")->orderBy("created_at", "desc")->paginate(10);
+        $carrusel1 = DB::Table("movies")->select("movies.*")->orderBy("created_at", "asc")->paginate(20);
+        $carrusel2 = DB::Table("movies")->select("movies.*")->orderBy("created_at", "asc")->paginate(10);
         $movie = DB::Table("config")
                 ->join("genres","genres.id", "=", "config.genre_id")
                 ->select("config.*", "genres.genero")

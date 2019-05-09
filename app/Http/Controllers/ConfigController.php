@@ -56,7 +56,9 @@ class ConfigController extends Controller
     {
         $config = new Config();
         try{
-            $this->grabar($request, $config);
+            $config->fill(array_merge($request->all(),["user_id"=>Auth::user()->id]));
+            $config->save();
+            //$this->grabar($request, $config);
             
             Session::flash("message-ok","El registro ha sido grabado!");            
         }catch(Exception $ex){
@@ -99,7 +101,11 @@ class ConfigController extends Controller
     {
         $config = Config::find($id);
         try{
-            $this->grabar($request, $config);
+            //$config->setImagen_portadaAttribute($request->file('imagen_portada'));
+            //$config->setImagen_appAttribute($request->file('imagen_app'));
+            $config->fill(array_merge($request->all(),["user_id"=>Auth::user()->id]));
+            $config->save();
+            //$this->grabar($request, $config);
             
             Session::flash("message-ok","El registro ha sido actualizado!");            
         }catch(Exception $ex){
@@ -128,7 +134,7 @@ class ConfigController extends Controller
         }
         return Redirect::to("/config");
     }
-    
+    /*
     private function grabar($request, $config){
         $archivo = $this->uploadFile($request->file('image'), 'local', true);
         if($archivo == ""){
@@ -145,4 +151,6 @@ class ConfigController extends Controller
         $config->user_id = Auth::user()->id;
         $config->save();
     }
+     * 
+     */
 }

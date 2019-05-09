@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
+//use App\Movies;
+use App\NewsModel as News;
+//use Auth;
 
 class ResetPasswordController extends Controller
 {
@@ -44,7 +47,12 @@ class ResetPasswordController extends Controller
     }
     
     public function getEmail(){
-        return view("auth.password");
+        $conf = $this->infoPortada();
+        $carrusel1 = $conf["carrusel1"];
+        $carrusel2 = $conf["carrusel2"];
+        $config = $conf["movie"];
+        $noticias = News::paginate(5);
+        return view('auth.password',compact('carrusel1', 'carrusel2', 'config', 'noticias'));        
     }
     
     public function postEmail(Request $request){
@@ -85,7 +93,15 @@ class ResetPasswordController extends Controller
             }
             
         }
-        
-        
+    }
+    
+    private function infoPortada(){
+        $carrusel1 = DB::Table("movies")->select("movies.*")->orderBy("created_at", "asc")->paginate(20);
+        $carrusel2 = DB::Table("movies")->select("movies.*")->orderBy("created_at", "asc")->paginate(10);
+        $movie = DB::Table("config")
+                ->join("genres","genres.id", "=", "config.genre_id")
+                ->select("config.*", "genres.genero")
+                ->first();
+        return compact("carrusel1","carrusel2","movie");
     }
 }

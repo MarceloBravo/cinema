@@ -11,11 +11,12 @@
 |
 */
 /*
-Route::get('/', function () {
-    return view('welcome');
+Route::get('login', function () {
+    return view('home');
 });
- */
-
+*/
+Route::get('login','HomeController@store');
+Route::get('dashboard','IndexController@index');
 Route::resource('/','HomeController');
 Route::resource('home','HomeController');
 Route::get('logout','HomeController@logout');
@@ -36,6 +37,13 @@ Route::Resource('config','ConfigController');
 Route::Resource('noticias','NewsController');
 Route::post('noticias/filtrar','NewsController@filtrar');
 Route::get('review', 'HomeController@reviews');
+Route::resource('musica','VideosController');
+Route::post('musica/filtrar','VideosController@filtrar');
+Route::resource('generos_musicales','GeneroMusicalController');
+Route::post('generos_musicales/filtrar','GeneroMusicalController@filtrar');
+Route::resource('mnt_videos','MntVideoController');
+Route::post('mnt_videos/filtrar','MntVideoController@filtrar');
+
 
 /** Resetear contraseña **/
 //Crear el arhivo password.blade.php en la carpeta views/auth

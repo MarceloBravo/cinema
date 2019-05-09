@@ -6,31 +6,23 @@
 
 @include('alerts.alerts')
 
-<div class="header" style="background: url('../../afiches/{{ $movie->imagen_portada }}') no-repeat 0px 0px;">
+<div class="header" style="background: url('../../afiches/{{ $config->imagen_portada }}') no-repeat 0px 0px;">
         <div class="top-header">
             <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt="" /></a>
-                <p>Movie Theater</p>
-            </div>
-            <div class="search">
-                <form>
-                    <input type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {
-                                                this.value = 'Search..';
-                                            }"/>
-                    <input type="submit" value="">
-                </form>
+                <a href="{{ url('/') }}"><img src="images/{{ $config->imagen_app }}" alt="" /></a>
+                <p>{{ $config->nombre_app }}</p>
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="header-info">
             
             
-            <h1>{{ $movie->nombre_pelicula_portada }}</h1>            
-            <p class="age"><a href="#">{{ $movie->censura_pelicula_portada }}</a>{{$movie->director_pelicula_portada }}</p>
-            <p class="review">Nota	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  {{ $movie->calificacion_pelicula_portada }}</p>
-            <p class="review reviewgo">Genero	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; {{ $movie->genero }}</p>
-            <p class="review">Fecha realización &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; {{ $movie->fecha_pelicula_portada }}</p>
-            <p class="special">{{ $movie->resena_pelicula_portada }}</p>
+            <h1>{{ $config->nombre_pelicula_portada }}</h1>            
+            <p class="age"><a href="#">{{ $config->censura_pelicula_portada }}</a>{{$config->director_pelicula_portada }}</p>
+            <p class="review">Nota	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  {{ $config->calificacion_pelicula_portada }}</p>
+            <p class="review reviewgo">Genero	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; {{ $config->genero }}</p>
+            <p class="review">Fecha realización &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; {{ $config->fecha_pelicula_portada }}</p>
+            <p class="special">{{ $config->resena_pelicula_portada }}</p>
            <!--
             <a class="video" href="#"><i class="video1"></i>WATCH TRAILER</a>
             <a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>
@@ -93,11 +85,11 @@
     </div>
     <div class="news">
         <div class="col-md-6 news-left-grid">
-            <h3>Don’t be late,</h3>
-            <h2>Book your ticket now!</h2>
-            <h4>Easy, simple & fast.</h4>
-            <a href="#"><i class="book"></i>BOOK TICKET</a>
-            <p>Get Discount up to <strong>10%</strong> if you are a member!</p>
+            <h3>{{ $config->titulo1 }}</h3>
+            <h2>{{ $config->titulo2 }}</h2>
+            <h4>{{ $config->titulo3 }}</h4>
+            <!-- <a href="#"><i class="book"></i>BOOK TICKET</a> -->
+            <p>{{ $config->titulo4 }}</p>
         </div>
         <div class="col-md-6 news-right-grid">
             <h3>Noticias</h3>

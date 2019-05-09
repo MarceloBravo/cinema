@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Movies;
 use App\NewsModel as News;
 use App\Repository;
+use App\Config;
 
 class ReviewsController extends Controller
 {
@@ -20,14 +21,16 @@ class ReviewsController extends Controller
         $movies = DB::table("movies")
             ->join("genres","genres.id","=","movies.genre_id")
             ->select("movies.*","genres.genero")
+            ->orderBy("created_at","desc")
             ->paginate(5);  
         $carrusel = Movies::all();
         $noticias = News::paginate(20);
+        $config = Config::first();
         
         $archivos = Repository::paginate(10);
           
         //return $movies;    
-        return view("reviews",compact("movies","carrusel","archivos", "noticias"));
+        return view("reviews",compact("movies","carrusel","archivos", "noticias", "config"));
     }
 
     /**

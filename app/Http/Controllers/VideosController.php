@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use App\Video;
+use App\Config;
 
 class VideosController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +16,10 @@ class VideosController extends Controller
      */
     public function index()
     {
-        return view("videos");
+        $videos = Video::paginate(12);
+        $config = Config::first();
+        $filtro = "";
+        return view("musica", compact("videos","filtro","config"));
     }
 
     /**
@@ -80,5 +86,15 @@ class VideosController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function filtrar(Request $request){
+        $filtro = $request['filtro'];
+        if($filtro == ""){
+            return Redirect::to("/musica");
+        }else{
+            $videos = Video::filtro($filtro);
+            return view("musica",compact("videos","filtro"));
+        }
     }
 }

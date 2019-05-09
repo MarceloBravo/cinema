@@ -6,3 +6,21 @@
 .imgPreview{
     padding-top: 70px;    
 }
+
+/*
+#header_footer{
+    position: absolute;
+}
+*/
+.logoPreview{
+    width: 250px;
+    height: 55px;
+}
+
+.fade{
+    display:none;
+}
+
+.fade.in{
+    display: block;
+}

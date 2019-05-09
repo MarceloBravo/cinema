@@ -873,6 +873,7 @@ a.b-home:hover{
 	width: 28.333%;
 	float: left;
 	margin: 2.5%;
+        height: 150px;
 }
 .featured ul li img {
 	width:100%;

@@ -16,7 +16,7 @@ class NewsController extends Controller
     
     public function __construct(){
         $this->middleware('auth');
-        $this->middleware('MDAdmin', ['only' => ['create', 'edit','delete']]); //Ejecuta el middleware de permisos
+        $this->middleware('MDAdmin', ['only'=>['create','store','edit','update','destroy']]);
     }
     /**
      * Display a listing of the resource.

@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'rol_id',
+        'name', 'email', 'password', 'rol_id', 'foto'
     ];
 
     /**
@@ -41,5 +41,14 @@ class User extends Authenticatable
     
     public function setPasswordAttribute($value){
         $this->attributes['password'] = bcrypt($value);
+    }
+    
+    public function setFotoAttribute($value){
+        if(isset($value)){
+            //$name = Carbon::now()->second.$value->getClientOriginalName();  //antenpone el segundo actual alnombre del campo para evitar que sobreescriba el archivo
+            $name = $value->getClientOriginalName();  //antenpone el segundo actual alnombre del campo para evitar que sobreescriba el archivo
+            \Storage::disk('appImages')->put($name, \File::get($value));   //Guarda el archivo en la carpeta afiche (ver config/filesystems.php)
+            $this->attributes['foto'] = $name;    //Guarda en el campo afiche el el nombnre del archivo sin su ruta
+        }
     }
 }

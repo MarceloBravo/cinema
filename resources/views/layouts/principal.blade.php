@@ -24,7 +24,7 @@
             <div class="menu">
                 <ul>
                     <li><a class="{{ (isset($navHome) ? $navHome : '') }}" href="{{ url('/') }}"><i class="home"></i></a></li>
-                    <li><a class="{{ (isset($navVideos) ? $navVideos : '') }}" href="videos.html"><div class="video"><i class="videos"></i><i class="videos1"></i></div></a></li>
+                    <li><a class="{{ (isset($navVideos) ? $navVideos : '') }}" href="{{ url('/musica') }}"><div class="video"><i class="videos"></i><i class="videos1"></i></div></a></li>
                     <li><a class="{{ (isset($navReviews) ? $navReviews : '') }}" href="{{ url('/reviews') }}"><div class="cat"><i class="watching"></i><i class="watching1"></i></div></a></li>                    
                     <li><a class="{{ (isset($navContacto) ? $navContacto : '') }}" href="{{ url('/contacto')}}"><div class="cnt"><i class="contact"></i><i class="contact1"></i></div></a></li>
                 </ul>
@@ -34,9 +34,9 @@
                 @yield('content')
                 	
                 <div class="footer">
-                    <h6>Disclaimer : </h6>
-                    <p class="claim">This is a freebies and not an official website, I have no intention of disclose any movie, brand, news.My goal here is to train or excercise my skill and share this freebies.</p>
-                    <a href="example@mail.com">example@mail.com</a>
+                    <h6>{{ $config->footer_title }} : </h6>
+                    <p class="claim">{{ $config->footer_text }}</p>
+                    <a href="{{ $config->footer_text2 }}">{{ $config->footer_text2 }}</a>
                     <div class="copyright">
                         <p> Template by  <a href="http://w3layouts.com">  W3layouts</a></p>
                     </div>

@@ -28,8 +28,8 @@ class UpdateUserRequest extends FormRequest
         return [
             "name"=>"required",  //Debe hacer referencia al nombre del objeto de formulario (DOM) no el nombre del campo de la base de datos
             "email"=>'required|email|max:30|unique:users,email,'.$this->usuario,
-            "rol_id"=>"required"
-            //
+            "rol_id"=>"required",
+            "foto"=>"max:100"
         ];
     }
 }

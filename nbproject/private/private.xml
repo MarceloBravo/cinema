@@ -3,16 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/cinema/resources/views/usuarios/form.blade.php</file>
-            <file>file:/C:/wamp/www/cinema/public/css/mantenedor_usuarios.css</file>
-            <file>file:/C:/wamp/www/cinema/resources/views/roles/editar.blade.php</file>
-            <file>file:/C:/wamp/www/cinema/resources/views/usuarios/editar.blade.php</file>
-            <file>file:/C:/wamp/www/cinema/resources/views/usuarios/crear.blade.php</file>
-            <file>file:/C:/wamp/www/cinema/app/Http/Requests/UpdateUserRequest.php</file>
-            <file>file:/C:/wamp/www/cinema/app/Http/Requests/CreateUserRequest.php</file>
-            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/UsuariosController.php</file>
-            <file>file:/C:/wamp/www/cinema/app/User.php</file>
-            <file>file:/C:/wamp/www/cinema/public/css/mantenedor_peliculas.css</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/VideosController.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/ReviewsController.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/FrontController.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/EmailController.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/wamp/www/cinema/resources/views/layouts/principal.blade.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/ConfigController.php</file>
+            <file>file:/C:/wamp/www/cinema/resources/views/home.blade.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/ContactosController.php</file>
+            <file>file:/C:/wamp/www/cinema/resources/views/config/form_header_footer.blade.php</file>
+            <file>file:/C:/wamp/www/cinema/app/Http/Controllers/Controller.php</file>
         </group>
     </open-files>
 </project-private>

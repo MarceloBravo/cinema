@@ -15,7 +15,7 @@
                 <!-- Condensed Table -->
                 <div class="card">
                     <div class="card-header">
-                        <h4>Géneros</h4>
+                        <h4>Repositorio</h4>
                     </div>
                     <div class="form-group">
                         <div class="col-md-1">
